@@ -1,8 +1,8 @@
 const express = require('express')
 const router = express.Router()
 
-router.post('/complexity', (req, res) => {
-  return res.status(200).json( { data: req.body.sentences })
-})
+const ComplexityController = require('../controllers/complexity')
+
+router.post('/complexity', ComplexityController.complexity)
 
 module.exports = router

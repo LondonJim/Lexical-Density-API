@@ -10,15 +10,16 @@ exports.complexity = ((req, res) => {
   })
 
   displayData = (nonLexical) => {
-    let wordsArray = words()
+    let wordsArray = createWordsArray()
     let totalWords = wordsArray.length
     let totalNonLexicalWords = checkNonLexical(wordsArray, nonLexical)
-    let density = nonLexicalDensity(totalWords, totalNonLexicalWords)
+    let totalLexicalWords = totalWords - totalNonLexicalWords
+    let density = lexicalDensity(totalWords, totalLexicalWords)
 
     return res.status(200).json( { data: { overall_density: density } })
   }
 
-  words = () => {
+  createWordsArray = () => {
     if (sentences[sentences.length - 1] === ".") sentences = sentences.slice(0, -1)
     let wordsArray = sentences.split(" ")
     return wordsArray
@@ -34,7 +35,7 @@ exports.complexity = ((req, res) => {
     return totalNonLexical
   }
 
-  nonLexicalDensity = (totalWords, totalNonLexicalWords) => {
+  lexicalDensity = (totalWords, totalNonLexicalWords) => {
     return Math.round((totalNonLexicalWords / totalWords) * 100) / 100
   }
 

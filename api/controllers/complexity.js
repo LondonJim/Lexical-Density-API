@@ -10,15 +10,25 @@ exports.complexity = ((req, res) => {
       this.sentences = this.req.body.sentences
     }
 
+    checkQuery() {
+      if (this.req.query.mode === 'verbose') {
+        this.showSentenceDensity = true
+      } else {
+        this.showSentenceDensity = false
+      }
+    }
+
     executeDisplay() {
       fs.readFile('./nonLexicalWords.txt', function(err, data) {
-        if(err) throw err;
-        let nonLexical = data.toString().split("\n");
+        if(err) throw err
+        let nonLexical = data.toString().split("\n")
+        this.checkQuery()
         this.displayData(nonLexical)
       }.bind(this))
     }
 
     displayData(nonLexical) {
+      console.log(this.showSentenceDensity)
       let wordsArray = this.createWordsArray()
       let totalWords = wordsArray.length
 

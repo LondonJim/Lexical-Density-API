@@ -7,15 +7,8 @@ exports.complexity = ((req, res) => {
     constructor(req, res) {
       this.req = req
       this.res = res
-      this.sentences = this.req.body.sentences
-    }
-
-    checkQuery() {
-      if (this.req.query.mode === 'verbose') {
-        this.showSentenceDensity = true
-      } else {
-        this.showSentenceDensity = false
-      }
+      this.sentenceDensities = []
+      this.sentences = this.req.body.sentences.toLowerCase()
     }
 
     executeDisplay() {
@@ -27,8 +20,15 @@ exports.complexity = ((req, res) => {
       }.bind(this))
     }
 
+    checkQuery() {
+      if (this.req.query.mode === 'verbose') {
+        this.showSentenceDensities = true
+      } else {
+        this.showSentenceDensities = false
+      }
+    }
+
     displayData(nonLexical) {
-      console.log(this.showSentenceDensity)
       let wordsArray = this.createWordsArray()
       let totalWords = wordsArray.length
 
@@ -41,9 +41,10 @@ exports.complexity = ((req, res) => {
     }
 
     createWordsArray() {
-      if (this.sentences[this.sentences.length - 1] === ".") this.sentences = this.sentences.slice(0, -1)
-      let wordsArray = this.sentences.split(" ")
-      return wordsArray
+      this.sentencesArray = this.sentences.split(".")
+      if (this.sentencesArray[this.sentencesArray.length - 1] === "") this.sentencesArray.pop()
+      wordsArray = this.sentencesArray.join("")
+      return wordsArray.split(" ")
     }
 
     checkNonLexical(words, nonLexical) {

@@ -49,8 +49,8 @@ exports.complexity = ((req, res) => {
 
     checkNonLexical(words, nonLexical) {
       let totalNonLexical = 0
-      for (let i=0; i < words.length - 1; i++) {
-        for (let j=0; j < nonLexical.length - 1; j++) {
+      for (let i=0; i < words.length; i++) {
+        for (let j=0; j < nonLexical.length; j++) {
           if (words[i] === nonLexical[j]) totalNonLexical ++
         }
       }

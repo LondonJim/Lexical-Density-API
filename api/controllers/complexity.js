@@ -43,7 +43,7 @@ exports.complexity = ((req, res) => {
     createWordsArray() {
       this.sentencesArray = this.sentences.split(".")
       if (this.sentencesArray[this.sentencesArray.length - 1] === "") this.sentencesArray.pop()
-      wordsArray = this.sentencesArray.join("")
+      let wordsArray = this.sentencesArray.join("")
       return wordsArray.split(" ")
     }
 

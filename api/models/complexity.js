@@ -12,7 +12,7 @@ class DisplayData {
 
   executeDisplay() {
     return new Promise(function(resolve, reject) {
-      let executing = fs.readFile('./nonLexicalWords.txt', function(err, data) {
+      fs.readFile('./nonLexicalWords.txt', function(err, data) {
         if(err) throw err
         let nonLexical = data.toString().split("\n")
         this.checkQuery()

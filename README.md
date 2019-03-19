@@ -29,7 +29,7 @@ Multiple sentences can return overall and individual densities (currently no imp
 
 ##### Installation
 
-`git clone https://github.com/LondonJim/Shop-API`
+`git clone https://github.com/LondonJim/Lexical-Density-Express-API`
 
 `npm install`
 

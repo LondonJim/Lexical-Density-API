@@ -40,6 +40,8 @@ Multiple sentences can return overall and individual densities (currently no imp
 `npm start`
 
 
+Besides the mocha/chai tests below I also use Postman API Development Environment
+
 ---
 
 ##### Routes

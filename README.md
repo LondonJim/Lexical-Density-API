@@ -50,13 +50,13 @@ Overall density
 ```
 POST /complexity
 ```
-example body json:
+example post body json:
 ```
 {
   "sentences" : "Jimmy loves going to the movies"
 }
 ```
-returns in the body:
+returns:
 ```
 { "data":
     {

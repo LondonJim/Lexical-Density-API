@@ -14,7 +14,7 @@ returns:
 }
 ```
 
-Multiple sentences can return overall and individual densities:
+Multiple sentences can return overall and individual densities (currently no implemented) eg.
 
 ```
 { "data":
@@ -25,14 +25,53 @@ Multiple sentences can return overall and individual densities:
 }
 ```
 
+---
+
+##### Installation
+
+`git clone https://github.com/LondonJim/Shop-API`
+
+`npm install`
+
+---
+
+##### Start server
+
+`npm start`
+
+
+---
+
 ##### Routes
 
 Overall density
 ```
-/complexity
+POST /complexity
+```
+example body json:
+```
+{
+  "sentences" : "Jimmy loves going to the movies"
+}
+```
+returns in the body:
+```
+{ "data":
+    {
+      overall_density: 0.42
+    }
+}
 ```
 
-Sentence density breakdown
+Sentence density breakdown (currently not implemented)
 ```
-/complexity?mode=sentences
+POST /complexity?mode=verbose
 ```
+
+---
+
+##### Testing
+
+Using Mocha and Chai libraries
+
+`npm test`

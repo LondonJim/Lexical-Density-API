@@ -65,7 +65,4 @@ class DisplayData {
   }
 }
 
-// displayData = new DisplayData(req, res)
-// displayData.executeDisplay()
-
 module.exports = { DisplayData: DisplayData }

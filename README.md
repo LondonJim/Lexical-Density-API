@@ -14,7 +14,7 @@ returns:
 }
 ```
 
-Multiple sentences can return overall and individual densities (currently no implemented) eg.
+Multiple sentences can return overall and individual densities (currently not implemented) eg.
 
 ```
 { "data":

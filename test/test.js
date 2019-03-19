@@ -23,7 +23,7 @@ describe('Complexity', () => {
     })
 
     it('should return the lexical density of multiple sentences in json', (done) => {
-      let sentence = { sentences: "Kat likes going to the cinema. Jimmy enjoys listening to music" }
+      let sentence = { sentences: "Kat likes going to the cinema. Jimmy enjoys listening to music." }
 
       chai.request(server)
         .post('/complexity')

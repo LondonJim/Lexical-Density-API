@@ -1,13 +1,13 @@
-const displayData = require('../models/complexity')
-const DisplayData = displayData.DisplayData
+const lexicalDensity = require('../models/lexicalDensity')
+const LexicalDensity = lexicalDensity.LexicalDensity
 
 exports.complexity = ((req, res) => {
   let display
   let sentences = req.body.sentences
   let query = req.query.mode
-  let displayData = new DisplayData(sentences, query);
+  let lexicalDensity = new LexicalDensity(sentences, query);
   (async () => {
-    await displayData.executeDisplay()
-    res.status(200).json( { data: { overall_density: displayData.density } })
+    await lexicalDensity.executeDisplay()
+    res.status(200).json( { data: { overall_density: lexicalDensity.density } })
   })()
 })

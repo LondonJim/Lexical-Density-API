@@ -1,6 +1,6 @@
 const fs = require('fs')
 
-class DisplayData {
+class LexicalDensity {
 
   constructor(sentences, query) {
     this.sentenceDensities = []
@@ -65,4 +65,4 @@ class DisplayData {
   }
 }
 
-module.exports = { DisplayData: DisplayData }
+module.exports = { LexicalDensity: LexicalDensity }

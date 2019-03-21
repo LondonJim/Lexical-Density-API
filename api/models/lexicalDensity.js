@@ -1,11 +1,12 @@
 const fs = require('fs')
+const nonLexicalWords = require('./nonLexicalWords')
+const NonLexicalWords = nonLexicalWords.NonLexicalWords
 
 class LexicalDensity {
 
   constructor(sentences, query) {
     this.sentenceDensities = []
     this.query = query
-
     this.density = 0
     this.sentences = sentences.toLowerCase()
   }
@@ -13,21 +14,23 @@ class LexicalDensity {
   executeDisplay() {
     return new Promise(function(resolve, reject) {
       fs.readFile('./nonLexicalWords.txt', function(err, data) {
-        if(err) throw err
-        let nonLexical = data.toString().split("\n")
-        this.checkQuery()
-        resolve(this.displayData(nonLexical))
+        if(err) {
+          reject(err)
+        } else {
+          let nonLexical = data.toString().split("\n")
+          resolve(this.displayData(nonLexical))
+        }
       }.bind(this))
     }.bind(this))
   }
 
-  checkQuery() {
-    if (this.query === 'verbose') {
-      this.showSentenceDensities = true
-    } else {
-      this.showSentenceDensities = false
-    }
-  }
+  // checkQuery() {
+  //   if (this.query === 'verbose') {
+  //     this.showSentenceDensities = true
+  //   } else {
+  //     this.showSentenceDensities = false
+  //   }
+  // }
 
   displayData(nonLexical) {
     let wordsArray = this.createWordsArray()

@@ -1,5 +1,6 @@
 const express = require('express')
 const app = express()
+const mongoose = require('mongoose')
 
 const complexityRoutes = require('./api/routes/complexity')
 
@@ -16,7 +17,7 @@ app.use((req, res, next) => {
   next()
 })
 
-app.post('/complexity', complexityRoutes)
+app.use('/complexity', complexityRoutes)
 
 app.use((req, res, next) => {
   const error = new Error('not found')

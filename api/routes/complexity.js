@@ -3,6 +3,6 @@ const router = express.Router()
 
 const ComplexityController = require('../controllers/complexity')
 
-router.post('/complexity', ComplexityController.complexity)
+router.post('/', ComplexityController.complexity)
 
 module.exports = router

@@ -3,46 +3,69 @@ const fs = require('fs')
 class LexicalDensity {
 
   constructor(sentences, query, words) {
-    this.words = words
+    this.overallDensity = []
     this.sentenceDensities = []
+    this.words = words
     this.query = query
-    this.density = 0
     this.sentences = sentences.toLowerCase()
   }
 
   main() {
     return new Promise(function(resolve, reject) {
-      resolve(this.displayData())
+      resolve(this.calculateData())
     }.bind(this))
   }
 
-  // checkQuery() {
-  //   if (this.query === 'verbose') {
-  //     this.showSentenceDensities = true
-  //   } else {
-  //     this.showSentenceDensities = false
-  //   }
-  // }
+  calculateData() {
+    this.parseSentences()
+    this.calcOverallDensity()
+    if (this.query === 'verbose') this.calcSentenceDensities()
 
-  displayData() {
-    let wordsArray = this.createWordsArray()
-    let totalWords = wordsArray.length
+    return { sentences: this.sentenceDensities, overall: this.overallDensity }
+  }
 
-    let totalNonLexicalWords = this.checkNonLexical(wordsArray)
+  calcOverallDensity(){
+    let totalWordsArray = this.createWordsArray()
 
+    let totals = this.findTotals(totalWordsArray)
+    this.overallDensity = this.lexicalDensity(totals.totalWords, totals.totalLexicalWords)
+  }
+
+  calcSentenceDensities() {
+    this.sentencesArray.forEach((sentence) => {
+      let totals = this.findTotals(sentence)
+      this.sentenceDensities.push(this.lexicalDensity(totals.totalWords, totals.totalLexicalWords))
+    })
+  }
+
+  findTotals(array) {
+    let totalWords = array.length
+    let totalNonLexicalWords = this.checkNonLexical(array)
     let totalLexicalWords = totalWords - totalNonLexicalWords
-    let density = this.lexicalDensity(totalWords, totalLexicalWords)
+    return { totalWords: totalWords, totalLexicalWords: totalLexicalWords}
+  }
 
-    this.density = density
 
-    return this.density
+  parseSentences() {
+    this.sentencesArray = this.sentences.split(".")
+    this.sentencesArray = this.parseSentenceArray()
   }
 
   createWordsArray() {
-    this.sentencesArray = this.sentences.split(".")
-    if (this.sentencesArray[this.sentencesArray.length - 1] === "") this.sentencesArray.pop()
-    let wordsArray = this.sentencesArray.join("")
-    return wordsArray.split(" ")
+    let totalWordsArray = [].concat.apply([], this.sentencesArray)
+    return totalWordsArray
+  }
+
+  parseSentenceArray() {
+    let parsedSentenceArray = []
+    this.sentencesArray.forEach((sentence) => {
+      sentence = sentence.replace(/[.,\/#!£$%\^&\*;:{}=\-_`''~()0-9]/g, '').split(' ')
+      sentence = sentence.filter((value, index, arr) => {
+        return value !== ""
+      })
+      if (sentence.length > 0) parsedSentenceArray.push(sentence)
+    })
+    return parsedSentenceArray
   }
 
   checkNonLexical(words) {

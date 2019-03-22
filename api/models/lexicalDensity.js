@@ -45,7 +45,6 @@ class LexicalDensity {
     return { totalWords: totalWords, totalLexicalWords: totalLexicalWords}
   }
 
-
   parseSentences() {
     this.sentencesArray = this.sentences.split(".")
     this.sentencesArray = this.parseSentenceArray()

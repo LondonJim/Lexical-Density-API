@@ -65,7 +65,7 @@ describe('Complexity', () => {
         })
     })
 
-    it('should return accurate overall results when there is multiple whitespace and punctuation', (done) => {
+    it('should return accurate overall results in verbose mode, multiple whitespace and punctuation', (done) => {
       let sentence = { sentences: "   .... Kat likes going to the cinema....Jimmy enjoys listening to music.    " }
 
       chai.request(server)

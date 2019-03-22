@@ -14,7 +14,7 @@ returns:
 }
 ```
 
-Multiple sentences can return overall and individual densities (currently not implemented) eg.
+Multiple sentences can return overall and individual densities eg.
 
 ```
 { "data":
@@ -65,7 +65,7 @@ returns:
 }
 ```
 
-Sentence density breakdown (currently not implemented)
+Sentence density breakdown
 ```
 POST /complexity?mode=verbose
 ```

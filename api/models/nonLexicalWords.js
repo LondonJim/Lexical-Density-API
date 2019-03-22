@@ -1,24 +1,17 @@
 const fs = require('fs')
 
-class NonLexicalWords {
-
-  constructor() {
-    this.words = []
-  }
-
-  loadWords() {
-    return new Promise(function(resolve, reject) {
-      fs.readFile('./nonLexicalWords.txt', function(err, data) {
-        if(err) {
-          reject(err)
-        } else {
-          this.words = data.toString().split("\n")
-          resolve(this.words)
-        }
-      }.bind(this))
+loadWords = () => {
+  let nonLexicalWords
+  return new Promise(function(resolve, reject) {
+    fs.readFile('./nonLexicalWords.txt', function(err, data) {
+      if(err) {
+        reject(err)
+      } else {
+        nonLexicalWords = resolve(data.toString().split("\n"))
+        return nonLexicalWords
+      }
     }.bind(this))
-  }
-
+  }.bind(this))
 }
 
-module.exports = { NonLexicalWords: NonLexicalWords }
+module.exports = loadWords

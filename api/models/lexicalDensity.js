@@ -1,26 +1,18 @@
 const fs = require('fs')
-const nonLexicalWords = require('./nonLexicalWords')
-const NonLexicalWords = nonLexicalWords.NonLexicalWords
 
 class LexicalDensity {
 
-  constructor(sentences, query) {
+  constructor(sentences, query, words) {
+    this.words = words
     this.sentenceDensities = []
     this.query = query
     this.density = 0
     this.sentences = sentences.toLowerCase()
   }
 
-  executeDisplay() {
+  main() {
     return new Promise(function(resolve, reject) {
-      fs.readFile('./nonLexicalWords.txt', function(err, data) {
-        if(err) {
-          reject(err)
-        } else {
-          let nonLexical = data.toString().split("\n")
-          resolve(this.displayData(nonLexical))
-        }
-      }.bind(this))
+      resolve(this.displayData())
     }.bind(this))
   }
 
@@ -32,11 +24,11 @@ class LexicalDensity {
   //   }
   // }
 
-  displayData(nonLexical) {
+  displayData() {
     let wordsArray = this.createWordsArray()
     let totalWords = wordsArray.length
 
-    let totalNonLexicalWords = this.checkNonLexical(wordsArray, nonLexical)
+    let totalNonLexicalWords = this.checkNonLexical(wordsArray)
 
     let totalLexicalWords = totalWords - totalNonLexicalWords
     let density = this.lexicalDensity(totalWords, totalLexicalWords)
@@ -53,11 +45,11 @@ class LexicalDensity {
     return wordsArray.split(" ")
   }
 
-  checkNonLexical(words, nonLexical) {
+  checkNonLexical(words) {
     let totalNonLexical = 0
     for (let i=0; i < words.length; i++) {
-      for (let j=0; j < nonLexical.length; j++) {
-        if (words[i] === nonLexical[j]) totalNonLexical ++
+      for (let j=0; j < this.words.length; j++) {
+        if (words[i] === this.words[j]) totalNonLexical ++
       }
     }
     return totalNonLexical

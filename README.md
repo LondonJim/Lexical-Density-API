@@ -17,17 +17,17 @@ returns:
 Multiple sentences can return overall and individual densities eg.
 
 ```
-{ "data":
-    {
-      sentence_density: [ 0.23, 0.1, 1.0, 0.0 ],
-      overall_density: 0.42
-    }
+{
+  "data": {
+    sentence_density: [ 0.23, 0.1, 1.0, 0.0 ],
+    overall_density: 0.42
+  }
 }
 ```
 
 ---
 
-##### Installation
+#### Installation
 
 `git clone https://github.com/LondonJim/Lexical-Density-Express-API`
 
@@ -35,7 +35,7 @@ Multiple sentences can return overall and individual densities eg.
 
 ---
 
-##### Start server
+#### Start server
 
 `npm start`
 
@@ -44,9 +44,9 @@ Besides the mocha/chai tests below I also use Postman API Development Environmen
 
 ---
 
-##### Routes
+#### Routes
 
-Overall density
+###### Overall density
 ```
 POST /complexity
 ```
@@ -58,21 +58,37 @@ example post body json:
 ```
 returns:
 ```
-{ "data":
-    {
-      overall_density: 0.42
-    }
+{
+  "data": {
+    overall_density: 0.42
+  }
 }
 ```
 
-Sentence density breakdown
+###### Sentence density breakdown
 ```
 POST /complexity?mode=verbose
 ```
 
+example post body json:
+```
+{
+  "sentences" : "Kat likes going to the cinema. Jimmy enjoys listening to music."
+}
+```
+returns:
+```
+{
+  "data": {
+    "sentence_density": [ 0.67, 0.8 ],
+    "overall_density": 0.73
+  }
+}
+```
+
 ---
 
-##### Testing
+#### Testing
 
 Using Mocha and Chai libraries
 

@@ -1,9 +1,9 @@
 const fs = require('fs')
 
-loadWords = () => {
+loadWords = (filePath) => {
   let nonLexicalWords
   return new Promise(function(resolve, reject) {
-    fs.readFile('./nonLexicalWords.txt', function(err, data) {
+    fs.readFile(filePath, function(err, data) {
       if(err) {
         reject(err)
       } else {

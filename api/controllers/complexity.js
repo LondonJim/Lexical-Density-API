@@ -9,7 +9,7 @@ exports.complexity = ((req, res, next) => {
 
   (async () => {
     try {
-      let words = await loadWords()
+      let words = await loadWords('./nonLexicalWords.txt')
       let lexicalDensity = new LexicalDensity(sentences, query, words)
       let density = await lexicalDensity.main()
       if (query === 'verbose') {
